@@ -1,0 +1,59 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: shopping-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: shopping
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - shopping-network
+
+  backend:
+    build: ./backend
+
+    container_name: shopping-backend
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "5000:5000"
+
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: shopping
+
+    networks:
+      - shopping-network
+
+  frontend:
+    build: ./frontend
+
+    container_name: shopping-frontend
+
+    depends_on:
+      - backend
+
+    ports:
+      - "8080:80"
+
+    networks:
+      - shopping-network
+
+networks:
+  shopping-network:
+
+volumes:
+  mysql_data:
