@@ -18,22 +18,58 @@ spec:
 
     spec:
       containers:
-      - name: backend
-        image: shopping-app-backend:latest
-        imagePullPolicy: Never
+        - name: backend
+          image: shopping-app-backend:latest
+          imagePullPolicy: Never
 
-        ports:
-        - containerPort: 5000
+          ports:
+            - containerPort: 5000
 
-        env:
-        - name: DB_HOST
-          value: mysql
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: DB_HOST
 
-        - name: DB_USER
-          value: root
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: DB_NAME
 
-        - name: DB_PASSWORD
-          value: root
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: PORT
 
-        - name: DB_NAME
-          value: shopping
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: DB_PASSWORD
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3

@@ -100,8 +100,6 @@ http://localhost:5000/health
 
 ## 📸 Application
 
-## 📸 Application
-
 ### 🛍️ Home Page
 
 ![Home Page](screenshots/Home.png)
