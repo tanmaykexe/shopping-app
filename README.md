@@ -100,7 +100,29 @@ http://localhost:5000/health
 
 ## 📸 Application
 
-(Add screenshots here after running the application.)
+## 📸 Application
+
+### 🛍️ Home Page
+
+![Home Page](screenshots/Home.png)
+
+---
+
+### 🐳 Docker Containers
+
+![Docker Containers](screenshots/docker-containers.png)
+
+---
+
+### 🔌 Backend API Response
+
+![Backend API](screenshots/api-response.png)
+
+---
+
+### 📁 Project Structure
+
+![Project Structure](screenshots/project-structure.png)
 
 ---
 
