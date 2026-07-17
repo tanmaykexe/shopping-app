@@ -13,6 +13,13 @@ A full-stack shopping application built using **Node.js**, **Express.js**, **MyS
 - Dockerized deployment
 - MySQL database integration
 - Responsive frontend
+- Dockerized 3-tier shopping application
+- Kubernetes Deployments and Services
+- ConfigMaps for application configuration
+- Secrets for sensitive credentials
+- Persistent Volumes and Persistent Volume Claims
+- Liveness and Readiness Probes
+- MySQL persistence across Pod restarts
 
 ---
 
