@@ -1,59 +1,97 @@
 # 🛒 Shopping App
 
-A full-stack shopping application built using **Node.js**, **Express.js**, **MySQL**, **Docker**, and **Docker Compose**.
+A full-stack **3-tier Shopping Application** built with **Node.js, MySQL, Docker, and Kubernetes**.
+
+The project demonstrates how to containerize an application, deploy it on Kubernetes, manage configuration securely, persist data, expose services through an NGINX Ingress, and follow production-oriented Kubernetes practices.
 
 ---
 
-## 🚀 Features
+## 🚀 Tech Stack
 
-- View available products
-- Purchase products
-- Automatic stock updates
-- RESTful API
-- Dockerized deployment
-- MySQL database integration
-- Responsive frontend
-- Dockerized 3-tier shopping application
-- Kubernetes Deployments and Services
-- ConfigMaps for application configuration
-- Secrets for sensitive credentials
-- Persistent Volumes and Persistent Volume Claims
-- Liveness and Readiness Probes
-- MySQL persistence across Pod restarts
-
----
-
-## 🛠️ Tech Stack
-
-- HTML
-- CSS
-- JavaScript
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
 - Node.js
 - Express.js
 - MySQL
 - Docker
 - Docker Compose
-- Git & GitHub
+- Kubernetes
+- Kind
+- NGINX Ingress Controller
 
 ---
 
-## 📂 Project Structure
+## ✨ Features
+
+- 🛒 Display products from MySQL
+- REST API using Express.js
+- Dockerized frontend and backend
+- Kubernetes Deployments
+- Kubernetes Services
+- ConfigMaps for application configuration
+- Secrets for database credentials
+- Persistent Volumes (PV)
+- Persistent Volume Claims (PVC)
+- Readiness Probe
+- Liveness Probe
+- Resource Requests & Limits
+- NGINX Ingress Controller
+- Custom domain (`shopping.local`)
+- Automatic pod recovery
+- Persistent MySQL storage
+
+---
+
+# 📐 Architecture
 
 ```
+                    Browser
+                        │
+                shopping.local
+                        │
+              NGINX Ingress Controller
+                        │
+        ┌───────────────┴───────────────┐
+        │                               │
+   Frontend Service                Backend Service
+        │                               │
+   Frontend Pod                   Backend Pod
+                                        │
+                             ConfigMap + Secret
+                                        │
+                                  MySQL Service
+                                        │
+                                   MySQL Pod
+                                        │
+                                   PVC → PV
+```
+
+---
+
+# 📂 Project Structure
+
+```text
 shopping-app/
 │
 ├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── routes/
-│   ├── server.js
-│   └── package.json
-│
 ├── frontend/
-│   └── index.html
-│
 ├── mysql/
-│   └── init.sql
+│
+├── k8s/
+│   ├── backend-configmap.yaml
+│   ├── backend-secret.yaml
+│   ├── backend-deployment.yaml
+│   ├── backend-service.yaml
+│   ├── frontend-deployment.yaml
+│   ├── frontend-service.yaml
+│   ├── mysql-deployment.yaml
+│   ├── mysql-service.yaml
+│   ├── mysql-pv.yaml
+│   ├── mysql-pvc.yaml
+│   └── ingress.yaml
+│
+├── kind-config.yaml
 │
 ├── docker-compose.yml
 └── README.md
@@ -61,73 +99,113 @@ shopping-app/
 
 ---
 
-## ▶️ Run the Project
+# 📸 Screenshots
 
-Clone the repository
+## Shopping Application
 
-```bash
-git clone https://github.com/tanmaykexe/shopping-app.git
+*(Add screenshot here)*
+
 ```
-
-Go into the project
-
-```bash
-cd shopping-app
-```
-
-Start the application
-
-```bash
-docker compose up --build -d
+screenshots/app.png
 ```
 
 ---
 
-## 🌐 Access
+## Kubernetes Pods
+
+*(Add screenshot here)*
+
+```
+screenshots/pods.png
+```
+
+---
+
+## Ingress
+
+*(Add screenshot here)*
+
+```
+screenshots/ingress.png
+```
+
+---
+
+## Architecture
+
+*(Optional architecture diagram)*
+
+---
+
+# 🛠 Kubernetes Features Implemented
+
+✅ Deployments
+
+✅ ReplicaSets
+
+✅ Pods
+
+✅ Services
+
+✅ ConfigMaps
+
+✅ Secrets
+
+✅ Persistent Volumes
+
+✅ Persistent Volume Claims
+
+✅ Liveness Probes
+
+✅ Readiness Probes
+
+✅ Resource Requests
+
+✅ Resource Limits
+
+✅ NGINX Ingress
+
+✅ Custom Domain
+
+---
+
+# 🌐 Access
 
 Frontend
 
 ```
-http://localhost:8080
+http://shopping.local
 ```
 
-Backend API
+Health Endpoint
 
 ```
-http://localhost:5000/products
+http://shopping.local/health
 ```
 
-Health Check
+Products API
 
 ```
-http://localhost:5000/health
+http://shopping.local/products
 ```
 
 ---
 
-## 📸 Application
+# 📚 Learning Outcomes
 
-### 🛍️ Home Page
+This project demonstrates:
 
-![Home Page](screenshots/Home.png)
-
----
-
-### 🐳 Docker Containers
-
-![Docker Containers](screenshots/docker-containers.png)
-
----
-
-### 🔌 Backend API Response
-
-![Backend API](screenshots/api-response.png)
-
----
-
-### 📁 Project Structure
-
-![Project Structure](screenshots/project-structure.png)
+- Docker containerization
+- Kubernetes application deployment
+- Service discovery
+- Persistent storage
+- Configuration management
+- Secret management
+- Health monitoring
+- Resource management
+- Ingress routing
+- Kubernetes troubleshooting
+- Production-oriented deployment practices
 
 ---
 
@@ -135,4 +213,4 @@ http://localhost:5000/health
 
 **Tanmay Khatri**
 
-Learning DevOps through practical projects.
+Built with ❤️ using Docker & Kubernetes 🚀
