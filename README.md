@@ -101,35 +101,84 @@ shopping-app/
 
 # 📸 Screenshots
 
-## Shopping Application
+---
 
-*(Add screenshot here)*
+## 🛒 Shopping Application
 
-```
-screenshots/app.png
-```
+The application running through **NGINX Ingress** using the custom domain `shopping.local`.
+
+![Shopping Application](screenshots/shopping-app.png)
 
 ---
 
-## Kubernetes Pods
+## ☸️ Kubernetes Pods
 
-*(Add screenshot here)*
+All application Pods running successfully inside the Kubernetes cluster.
 
-```
-screenshots/pods.png
-```
+![Kubernetes Pods](screenshots/kubectl-pods.png)
 
 ---
 
-## Ingress
+## 🌐 Kubernetes Services
 
-*(Add screenshot here)*
+Internal Services exposing the frontend, backend, and MySQL components.
 
-```
-screenshots/ingress.png
-```
+![Kubernetes Services](screenshots/kubectl-services.png)
 
 ---
+
+## 🚪 NGINX Ingress
+
+Ingress resource routing traffic from `shopping.local` to the appropriate Kubernetes Services.
+
+![Kubernetes Ingress](screenshots/kubectl-ingress.png)
+
+---
+
+## ⚙️ Backend Deployment
+
+Backend Deployment configured with:
+
+- ConfigMaps
+- Secrets
+- Liveness Probe
+- Readiness Probe
+- Resource Requests
+- Resource Limits
+
+![Backend Deployment](screenshots/kubectl-describe-backend.png)
+
+---
+
+## 🐳 Docker Containers
+
+Application running with Docker Compose during the Docker deployment phase.
+
+![Docker Containers](screenshots/docker-containers.png)
+
+---
+
+## 📦 Docker API Response
+
+Backend API successfully returning product data.
+
+![API Response](screenshots/api-response.png)
+
+---
+
+## 📁 Project Structure
+
+Project directory structure.
+
+![Project Structure](screenshots/project-structure.png)
+
+---
+
+## 🏠 Docker Version Home Page
+
+Application running using Docker Compose before migrating to Kubernetes.
+
+![Docker Home](screenshots/Home.png)
 
 ## Architecture
 
