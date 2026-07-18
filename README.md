@@ -1,265 +1,308 @@
 # 🛒 Shopping App
 
-A full-stack **3-tier Shopping Application** built with **Node.js, MySQL, Docker, and Kubernetes**.
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-The project demonstrates how to containerize an application, deploy it on Kubernetes, manage configuration securely, persist data, expose services through an NGINX Ingress, and follow production-oriented Kubernetes practices.
+> A production-oriented DevOps project demonstrating containerization,
+> Kubernetes orchestration, and Helm-based application deployment.
 
----
+A full-stack **3-tier Shopping Application** built with **Node.js,
+MySQL, Docker, Kubernetes, and Helm**.
 
-## 🚀 Tech Stack
+The project demonstrates modern cloud-native application deployment by
+containerizing a full-stack application, orchestrating it with
+Kubernetes, packaging deployments using Helm, managing configuration
+securely with ConfigMaps and Secrets, persisting data using Persistent
+Volumes, exposing services through an NGINX Ingress Controller, and
+following production-oriented deployment practices.
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- Node.js
-- Express.js
-- MySQL
-- Docker
-- Docker Compose
-- Kubernetes
-- Kind
-- NGINX Ingress Controller
+------------------------------------------------------------------------
 
----
+# 🚀 Tech Stack
 
-## ✨ Features
+-   HTML5
+-   CSS3
+-   JavaScript (Vanilla)
+-   Node.js
+-   Express.js
+-   MySQL
+-   Docker
+-   Docker Compose
+-   Kubernetes
+-   Helm
+-   Kind
+-   NGINX Ingress Controller
 
-- 🛒 Display products from MySQL
-- REST API using Express.js
-- Dockerized frontend and backend
-- Kubernetes Deployments
-- Kubernetes Services
-- ConfigMaps for application configuration
-- Secrets for database credentials
-- Persistent Volumes (PV)
-- Persistent Volume Claims (PVC)
-- Readiness Probe
-- Liveness Probe
-- Resource Requests & Limits
-- NGINX Ingress Controller
-- Custom domain (`shopping.local`)
-- Automatic pod recovery
-- Persistent MySQL storage
+------------------------------------------------------------------------
 
----
+# ✨ Features
+
+-   🛒 Display products from MySQL
+-   REST API using Express.js
+-   Dockerized frontend and backend
+-   Kubernetes Deployments
+-   Kubernetes Services
+-   ConfigMaps
+-   Secrets
+-   Persistent Volumes (PV)
+-   Persistent Volume Claims (PVC)
+-   Readiness Probe
+-   Liveness Probe
+-   Resource Requests & Limits
+-   NGINX Ingress Controller
+-   Custom Domain (`shopping.local`)
+-   Automatic Pod Recovery
+-   Persistent MySQL Storage
+-   Helm Charts
+-   Helm-based Deployment & Release Management
+
+------------------------------------------------------------------------
 
 # 📐 Architecture
 
-```
-                    Browser
-                        │
-                shopping.local
-                        │
-              NGINX Ingress Controller
-                        │
-        ┌───────────────┴───────────────┐
-        │                               │
-   Frontend Service                Backend Service
-        │                               │
-   Frontend Pod                   Backend Pod
-                                        │
-                             ConfigMap + Secret
-                                        │
-                                  MySQL Service
-                                        │
-                                   MySQL Pod
-                                        │
-                                   PVC → PV
+``` text
+                           Browser
+                               │
+                        shopping.local
+                               │
+                   NGINX Ingress Controller
+                               │
+                     Frontend Service
+                               │
+                  Frontend Deployment
+                               │
+                     Frontend Pods
+                               │
+                      Backend Service
+                               │
+                  Backend Deployment
+                               │
+                      Backend Pods
+                               │
+                  ConfigMap + Secret
+                               │
+                      MySQL Service
+                               │
+                   MySQL Deployment
+                               │
+                        MySQL Pod
+                               │
+                  PersistentVolumeClaim
+                               │
+                    Persistent Volume
 ```
 
----
+------------------------------------------------------------------------
 
 # 📂 Project Structure
 
-```text
+``` text
 shopping-app/
-│
 ├── backend/
 ├── frontend/
 ├── mysql/
-│
 ├── k8s/
-│   ├── backend-configmap.yaml
-│   ├── backend-secret.yaml
-│   ├── backend-deployment.yaml
-│   ├── backend-service.yaml
-│   ├── frontend-deployment.yaml
-│   ├── frontend-service.yaml
-│   ├── mysql-deployment.yaml
-│   ├── mysql-service.yaml
-│   ├── mysql-pv.yaml
-│   ├── mysql-pvc.yaml
-│   └── ingress.yaml
-│
+├── shopping-chart/
 ├── kind-config.yaml
-│
 ├── docker-compose.yml
 └── README.md
 ```
 
----
+------------------------------------------------------------------------
+
+# 🚀 Getting Started
+
+## Clone
+
+``` bash
+git clone <YOUR_REPOSITORY_URL>
+cd shopping-app
+```
+
+## Docker
+
+``` bash
+docker compose up --build
+```
+
+## Kubernetes
+
+``` bash
+kubectl apply -f k8s/
+```
+
+## Helm
+
+``` bash
+helm install myshop ./shopping-chart
+```
+
+------------------------------------------------------------------------
 
 # 📸 Screenshots
 
----
-
 ## 🛒 Shopping Application
 
-The application running through **NGINX Ingress** using the custom domain `shopping.local`.
+The application running through **NGINX Ingress** using the custom
+domain `shopping.local`.
 
 ![Shopping Application](screenshots/shopping-app.png)
 
----
+------------------------------------------------------------------------
 
 ## ☸️ Kubernetes Pods
 
-All application Pods running successfully inside the Kubernetes cluster.
+All application Pods running successfully.
 
 ![Kubernetes Pods](screenshots/kubectl-pods.png)
 
----
+------------------------------------------------------------------------
 
 ## 🌐 Kubernetes Services
 
-Internal Services exposing the frontend, backend, and MySQL components.
+Internal Services exposing the frontend, backend, and MySQL.
 
 ![Kubernetes Services](screenshots/kubectl-services.png)
 
----
+------------------------------------------------------------------------
 
 ## 🚪 NGINX Ingress
 
-Ingress resource routing traffic from `shopping.local` to the appropriate Kubernetes Services.
+Ingress routing traffic from `shopping.local`.
 
 ![Kubernetes Ingress](screenshots/kubectl-ingress.png)
 
----
+------------------------------------------------------------------------
 
 ## ⚙️ Backend Deployment
 
-Backend Deployment configured with:
-
-- ConfigMaps
-- Secrets
-- Liveness Probe
-- Readiness Probe
-- Resource Requests
-- Resource Limits
+Configured with ConfigMaps, Secrets, Liveness & Readiness Probes and
+Resource Limits.
 
 ![Backend Deployment](screenshots/kubectl-describe-backend.png)
 
----
+------------------------------------------------------------------------
 
 ## 🐳 Docker Containers
 
-Application running with Docker Compose during the Docker deployment phase.
+Application running with Docker Compose.
 
 ![Docker Containers](screenshots/docker-containers.png)
 
----
+------------------------------------------------------------------------
 
 ## 📦 Docker API Response
 
-Backend API successfully returning product data.
+Backend API returning product data.
 
 ![API Response](screenshots/api-response.png)
 
----
+------------------------------------------------------------------------
 
 ## 📁 Project Structure
 
-Project directory structure.
-
 ![Project Structure](screenshots/project-structure.png)
 
----
+------------------------------------------------------------------------
 
-## 🏠 Docker Version Home Page
+## 🏠 Docker Home
 
-Application running using Docker Compose before migrating to Kubernetes.
+Application running with Docker Compose.
 
 ![Docker Home](screenshots/Home.png)
 
-## Architecture
+------------------------------------------------------------------------
 
-*(Optional architecture diagram)*
+## ⎈ Helm Release
 
----
+Successful Helm deployment.
+
+![Helm Release](screenshots/helm-list.png)
+
+------------------------------------------------------------------------
 
 # 🛠 Kubernetes Features Implemented
 
-✅ Deployments
+-   ✅ Deployments
+-   ✅ ReplicaSets
+-   ✅ Pods
+-   ✅ Services
+-   ✅ ConfigMaps
+-   ✅ Secrets
+-   ✅ Persistent Volumes
+-   ✅ Persistent Volume Claims
+-   ✅ Liveness Probes
+-   ✅ Readiness Probes
+-   ✅ Resource Requests
+-   ✅ Resource Limits
+-   ✅ NGINX Ingress
+-   ✅ Custom Domain
+-   ✅ Helm Chart
+-   ✅ Helm Release Management
 
-✅ ReplicaSets
+------------------------------------------------------------------------
 
-✅ Pods
+# ⎈ Helm Deployment
 
-✅ Services
+``` bash
+helm lint ./shopping-chart
+helm template myshop ./shopping-chart
+helm install myshop ./shopping-chart
+helm list
+helm status myshop
+helm upgrade myshop ./shopping-chart
+helm rollback myshop <REVISION_NUMBER>
+helm uninstall myshop
+```
 
-✅ ConfigMaps
-
-✅ Secrets
-
-✅ Persistent Volumes
-
-✅ Persistent Volume Claims
-
-✅ Liveness Probes
-
-✅ Readiness Probes
-
-✅ Resource Requests
-
-✅ Resource Limits
-
-✅ NGINX Ingress
-
-✅ Custom Domain
-
----
+------------------------------------------------------------------------
 
 # 🌐 Access
 
-Frontend
+**Frontend**
 
-```
+``` text
 http://shopping.local
 ```
 
-Health Endpoint
+**Health**
 
-```
+``` text
 http://shopping.local/health
 ```
 
-Products API
+**Products API**
 
-```
+``` text
 http://shopping.local/products
 ```
 
----
+------------------------------------------------------------------------
 
 # 📚 Learning Outcomes
 
-This project demonstrates:
+-   Docker containerization
+-   Kubernetes orchestration
+-   Service discovery
+-   Persistent storage
+-   ConfigMaps & Secrets
+-   Health monitoring
+-   Resource management
+-   Ingress routing
+-   Helm chart creation
+-   Helm release management
+-   Helm templating
+-   Kubernetes troubleshooting
+-   Production-oriented deployment practices
 
-- Docker containerization
-- Kubernetes application deployment
-- Service discovery
-- Persistent storage
-- Configuration management
-- Secret management
-- Health monitoring
-- Resource management
-- Ingress routing
-- Kubernetes troubleshooting
-- Production-oriented deployment practices
-
----
+------------------------------------------------------------------------
 
 ## 👨‍💻 Author
 
 **Tanmay Khatri**
 
-Built with ❤️ using Docker & Kubernetes 🚀
+Built with ❤️ using Docker, Kubernetes, and Helm 🚀
+

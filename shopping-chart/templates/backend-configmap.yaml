@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: {{ include "shopping-app.fullname" . }}-backend-config
+
+  labels:
+    {{- include "shopping-app.labels" . | nindent 4 }}
+
+data:
+  DB_HOST: {{ .Values.backend.config.dbHost | quote }}
+  DB_NAME: {{ .Values.backend.config.dbName | quote }}
+  PORT: {{ .Values.backend.config.port | quote }}

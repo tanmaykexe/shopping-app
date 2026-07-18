@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: {{ include "shopping-app.fullname" . }}-mysql-service
+
+  labels:
+    {{- include "shopping-app.labels" . | nindent 4 }}
+
+spec:
+  type: {{ .Values.mysql.service.type }}
+
+  selector:
+    app: {{ include "shopping-app.fullname" . }}-mysql
+
+  ports:
+  - port: {{ .Values.mysql.service.port }}
+    targetPort: {{ .Values.mysql.service.port }}
+    protocol: TCP

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: {{ include "shopping-app.fullname" . }}-mysql-pvc
+
+  labels:
+    {{- include "shopping-app.labels" . | nindent 4 }}
+
+spec:
+  accessModes:
+    - {{ .Values.mysql.persistence.accessMode }}
+
+  resources:
+    requests:
+      storage: {{ .Values.mysql.persistence.size }}
+
+  {{- if .Values.mysql.persistence.storageClass }}
+  storageClassName: {{ .Values.mysql.persistence.storageClass }}
+  {{- end }}
