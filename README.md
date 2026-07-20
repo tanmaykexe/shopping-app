@@ -231,6 +231,13 @@ Detailed status of the deployed Helm release.
 ![Helm Status](screenshots/helm-status.png)
 
 
+## 🚀 GitHub Actions CI/CD
+
+GitHub Actions automatically builds the frontend and backend Docker images and pushes them to Amazon ECR whenever changes are pushed to the `main` branch.
+
+![GitHub Actions Workflow](screenshots/github-actions-success.png)
+
+
 # 🛠 Kubernetes Features Implemented
 
 -   ✅ Deployments
@@ -266,6 +273,37 @@ helm uninstall myshop
 ```
 
 ------------------------------------------------------------------------
+
+# 🔄 GitHub Actions CI/CD
+
+This project uses **GitHub Actions** to automatically build and push Docker images to **Amazon Elastic Container Registry (ECR)** whenever changes are pushed to the `main` branch.
+
+### Workflow
+
+```text
+Developer
+    │
+git push origin main
+    │
+GitHub Actions
+    │
+Build Backend Image
+    │
+Push Backend Image → Amazon ECR
+    │
+Build Frontend Image
+    │
+Push Frontend Image → Amazon ECR
+```
+
+### Technologies Used
+
+- GitHub Actions
+- Amazon ECR
+- Docker
+- AWS IAM
+- AWS CLI
+
 
 # 🌐 Access
 
@@ -304,6 +342,8 @@ http://shopping.local/products
 -   Helm templating
 -   Kubernetes troubleshooting
 -   Production-oriented deployment practices
+-   GitHub Actions CI/CD
+-   Amazon Elastic Container Registry (ECR)
 
 ------------------------------------------------------------------------
 
