@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to Amazon ECR
+name: Build and Push Docker Images to Amazon ECR
 
 on:
   push:
@@ -24,19 +24,38 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build Docker Image
+      # -----------------------
+      # Backend
+      # -----------------------
+      - name: Build Backend Image
         run: |
-          docker build -t shopping-app .
+          docker build -t shopping-backend ./backend
 
-      - name: Tag Docker Image
+      - name: Tag Backend Image
         run: |
-          docker tag shopping-app:latest \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-app:latest
+          docker tag shopping-backend:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-backend:latest
 
-      - name: Push Docker Image
+      - name: Push Backend Image
         run: |
           docker push \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-app:latest
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-backend:latest
+
+      # -----------------------
+      # Frontend
+      # -----------------------
+      - name: Build Frontend Image
+        run: |
+          docker build -t shopping-frontend ./frontend
+
+      - name: Tag Frontend Image
+        run: |
+          docker tag shopping-frontend:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-frontend:latest
+
+      - name: Push Frontend Image
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/shopping-frontend:latest
